@@ -1,1 +1,52 @@
-<p>products works!</p>
+<div class="container-fluid">
+    <div class="row">
+
+        <img class="col-1" [src]="store.logo" style="height: auto;">
+
+        <div class="col-5 d-flex align-items-center">
+            <div class="row"><div class="col-12">{{store.name}}</div></div>
+          
+            </div>
+  <div class="row"><div class="col-12"></div>{{nationalID| getAge}}</div></div>
+  <div class="row"><div class="col-12"></div>{{cardnumber| creditcard}}</div></div>
+        <div class=" col-3">
+            <select class="dropdown" id="cat" [(ngModel)]="selectCatID">
+                                              
+                <option *ngFor="let category of catlist" [value]="category.id">
+                    {{category.name}}</option>
+            </select>
+        </div>
+       <div class="row">
+           <div class="col-6 d-flex">
+              <div class="col-2"><strong>Order date:</strong></div> 
+              <div class="col-2">{{orderDate | date: "mediumDate"}}</div>
+           </div>
+           <div class="col-6 d-flex">
+            <div class="col-2"><Strong>Total price: </Strong></div> 
+            <div class="col-2">{{total|currency:'EGP':'code'}}</div>
+        </div>
+       </div>
+    <div class="row d-flex justify-content-start my-4">
+        <div class="card col-2 mx-4" appShadow *ngFor="let prod of products; let i=index; TrackBy:productTrack"
+         [ngClass]="{'d-none':selectCatID!=prod.categoryID, 'bg-warning':prod.quantity==1, 'bg-secondary':prod.quantity>1}"
+         [hidden]="prod.quantity==0"
+          id="card-vew">
+         
+            <img [src]="prod.img" class="card-img-top pt-3" />
+            <div class="card-body">
+                <h3 class="card-title">{{prod.Name}}</h3>
+                <ng-template [ngIf]="nodiscount" [ngIfElse]="discount">
+                 
+                </ng-template>
+                <ng-template #discount>
+                    <p >We offer an explicit discount of {{prod.discount}}</p>
+                </ng-template>
+                <button class="btn btn-primary" (click)="purchased(prod,prod.Price); ">buy</button>
+                <p>{{prod.quantity}}</p>
+                <p>{{prod.Price}}</p>
+            </div>
+
+        </div>
+        <label *ngIf="isPurchase">thank you for purchasing</label>
+      
+    </div>

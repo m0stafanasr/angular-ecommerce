@@ -7,18 +7,25 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProductsComponent } from './components/products/products.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
-
+import { FormsModule } from '@angular/forms';
+import { ShadowDirective } from './directives/shadow.directive';
+import { GetAgePipe } from './pipes/get-age.pipe';
+import { CreditcardPipe } from './pipes/creditcard.pipe';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
     ProductsComponent,
-    SidemenuComponent
+    SidemenuComponent,
+    ShadowDirective,
+    GetAgePipe,
+    CreditcardPipe
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
