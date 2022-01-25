@@ -7,13 +7,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page"  routerLink="/home" routerLinkActive="active">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Account</a>
+          <a class="nav-link" routerLink="/profile" routerLinkActive="active">Account</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">products</a>
+            <a class="nav-link" routerLink="/products" routerLinkActive="active">products</a>
           </li>
       </ul>
       <form class="d-flex">
@@ -28,3 +28,4 @@
     <img class="col-2" src="assets/2.jpg"/>
     <img class="col-2" src="assets/3.jpg"/>
 </div>
+<router-outlet></router-outlet>

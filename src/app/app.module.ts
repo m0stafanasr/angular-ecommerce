@@ -11,6 +11,9 @@ import { FormsModule } from '@angular/forms';
 import { ShadowDirective } from './directives/shadow.directive';
 import { GetAgePipe } from './pipes/get-age.pipe';
 import { CreditcardPipe } from './pipes/creditcard.pipe';
+import { MainOrderComponent } from './main-order/main-order.component';
+import { MainComponent } from './components/main/main.component';
+import { MainpageComponent } from './mainpage/mainpage.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +23,10 @@ import { CreditcardPipe } from './pipes/creditcard.pipe';
     SidemenuComponent,
     ShadowDirective,
     GetAgePipe,
-    CreditcardPipe
+    CreditcardPipe,
+    MainOrderComponent,
+    MainComponent,
+    MainpageComponent
   ],
   imports: [
     BrowserModule,

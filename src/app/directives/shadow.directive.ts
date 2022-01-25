@@ -4,7 +4,7 @@ import { Directive,ElementRef, HostListener, Input } from '@angular/core';
   selector: '[appShadow]'
 })
 export class ShadowDirective {
-  @Input() highlightColor:string = "orange";
+  @Input('appShadow') highlightColor:string = "orange";
  
   @Input() defaultColor:string = "grey";
   constructor(private elref:ElementRef) {  

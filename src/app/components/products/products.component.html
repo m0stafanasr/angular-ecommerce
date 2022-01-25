@@ -1,33 +1,27 @@
 <div class="container-fluid">
     <div class="row">
 
-        <img class="col-1" [src]="store.logo" style="height: auto;">
-
         <div class="col-5 d-flex align-items-center">
-            <div class="row"><div class="col-12">{{store.name}}</div></div>
+
           
             </div>
-  <div class="row"><div class="col-12"></div>{{nationalID| getAge}}</div></div>
-  <div class="row"><div class="col-12"></div>{{cardnumber| creditcard}}</div></div>
-        <div class=" col-3">
+       <!--<div class=" col-3">
             <select class="dropdown" id="cat" [(ngModel)]="selectCatID">
                                               
                 <option *ngFor="let category of catlist" [value]="category.id">
                     {{category.name}}</option>
             </select>
-        </div>
+        </div>--> 
        <div class="row">
-           <div class="col-6 d-flex">
-              <div class="col-2"><strong>Order date:</strong></div> 
-              <div class="col-2">{{orderDate | date: "mediumDate"}}</div>
-           </div>
+        
            <div class="col-6 d-flex">
             <div class="col-2"><Strong>Total price: </Strong></div> 
-            <div class="col-2">{{total|currency:'EGP':'code'}}</div>
+           <!-- <div class="col-2">{{total}}</div>-->
         </div>
        </div>
-    <div class="row d-flex justify-content-start my-4">
-        <div class="card col-2 mx-4" appShadow *ngFor="let prod of products; let i=index; TrackBy:productTrack"
+  
+    <div class="row d-flex  my-4">
+        <!--<div class="card col-2 mx-4" appShadow="yellow" defaultColor="black" *ngFor="let prod of products; let i=index; TrackBy:productTrack"
          [ngClass]="{'d-none':selectCatID!=prod.categoryID, 'bg-warning':prod.quantity==1, 'bg-secondary':prod.quantity>1}"
          [hidden]="prod.quantity==0"
           id="card-vew">
@@ -44,9 +38,40 @@
                 <button class="btn btn-primary" (click)="purchased(prod,prod.Price); ">buy</button>
                 <p>{{prod.quantity}}</p>
                 <p>{{prod.Price}}</p>
-            </div>
+            </div> -->
 
-        </div>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col-1">#</th>
+                    <th scope="col-2">name</th>
+                    <th scope="col-2">imag</th>
+                    <th scope="col-2">quantity</th>
+                    <th scope="col-2">price</th>
+                    <th scope="col-2">amount</th>
+                    <th scope="col-2">add to cart</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr  appShadow="yellow" defaultColor="black" *ngFor="let prod of prodList; let i=index; TrackBy:productTrack"
+                  [ngClass]="{ 'bg-warning':prod.quantity==1, 'bg-secondary':prod.quantity>1}"
+             
+                  [hidden]="prod.quantity==0">
+                    <td scope="col-1">{{i+1}}</td>
+                    <td scope="col-2">{{prod.Name}}</td>
+                    <td scope="col-2"><img [src]='prod.img'/></td>
+                    <td scope="col-2">{{prod.quantity}}</td>
+                    <td scope="col-2">{{prod.Price}}</td>
+                    <td scope="col-2"><input type="number" #amount></td>
+                    <td scope="col-2" ><button class="btn btn-primary" (click)="purchased(prod, amount.value); ">buy</button></td>
+                  </tr>
+
+                </tbody>
+              </table>
+
+
+       
         <label *ngIf="isPurchase">thank you for purchasing</label>
       
     </div>
