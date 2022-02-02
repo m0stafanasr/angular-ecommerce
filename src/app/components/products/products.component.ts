@@ -3,7 +3,8 @@ import { Store } from 'src/app/view_models/store';
 import { IProduct } from 'src/app/view_models/iproduct'
 import { DiscountOffers } from 'src/app/view_models/discount-offers'
 import { ICategory } from 'src/app/view_models/category'
-import { ProductsService } from 'src/app/services/products.service';
+import { ProductsdbService } from 'src/app/services/productsdb.service';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class ProductsComponent implements OnInit, OnChanges {
   @Input() sendCatID: number = 0
+  @Input() returnQuant:number=0
   @Output()totalPrice: EventEmitter<number>
   @Output()addedProduct:EventEmitter<IProduct>
 
@@ -20,12 +22,12 @@ export class ProductsComponent implements OnInit, OnChanges {
   prodList: IProduct[] = []
   nodiscount: boolean = false;
   isPurchase: boolean = false;
-  
-// selectCatID: number = 0;
+  deletequantity:number=0
+
 
   total: number = 0
 addedItem:IProduct[]=[]
-  constructor(private ProdServ: ProductsService) {
+  constructor(private ProdServ: ProductsdbService, private location: Location) {
     this.totalPrice=new EventEmitter<number>();
     this.addedProduct= new EventEmitter<IProduct>();
   /*  this.cat=[
@@ -46,14 +48,19 @@ addedItem:IProduct[]=[]
   
   }
   ngOnChanges(): void {
-    this.prodList=this.ProdServ.getprodCat(this.sendCatID);
+   this.ProdServ.getProductsCat(this.sendCatID)
+   .subscribe(prods=>{this.addedItem=prods})
   }
 
   ngOnInit(): void {
-    this.prodList=this.ProdServ.showProducts()
+    this.ProdServ.getAllProducts().subscribe(prods=>this.addedItem=prods)
+  
   }
 
-  
+  returned(products:IProduct){
+    products.quantity+= this.returnQuant
+  }
+
   purchased(products: IProduct, amount: string) {
   let productQuantity:number=+amount;
 
@@ -64,15 +71,23 @@ addedItem:IProduct[]=[]
       this.total += products.Price * +purchaseAmount
       products.quantity = products.quantity - +purchaseAmount
     }
-    let item:IProduct= {ID: products.ID, Name: products.Name,Price: products.Price ,quantity: productQuantity ,img: products.img, categoryID: products.categoryID, discount:products.discount}
+    let item:IProduct= {id: products.id, Name: products.Name,Price: products.Price ,quantity: productQuantity ,img: products.img, categoryID: products.categoryID, discount:products.discount}
     this.totalPrice.emit(this.total)
     this.addedProduct.emit(item)
   }
 
   productTrack(index: number, prod: IProduct): number {
-    return prod.ID
+    return prod.id
   }
 
+  deleteprd(prdID:number ){
+    
+    if(confirm("delete this product?")==true){
+       this.ProdServ.delete(prdID).subscribe()
+    window.location.reload()
+    }
+   
+  }
   /*togglecat() {
     this.selectCatID = 1 ? 2 : 1
   }*/

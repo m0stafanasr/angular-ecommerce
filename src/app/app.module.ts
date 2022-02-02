@@ -14,6 +14,14 @@ import { CreditcardPipe } from './pipes/creditcard.pipe';
 import { MainOrderComponent } from './main-order/main-order.component';
 import { MainComponent } from './components/main/main.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { EditProductComponent } from './components/edit-product/edit-product.component';
+import { AddNewComponent } from './components/add-new/add-new.component';
+import { LoginComponent } from './components/login/login.component';
+import { ModalDirective } from './directives/modal.directive';
+import {HttpClientModule} from '@angular/common/http';
+import { NewUserComponent } from './components/new-user/new-user.component'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,12 +34,20 @@ import { MainpageComponent } from './mainpage/mainpage.component';
     CreditcardPipe,
     MainOrderComponent,
     MainComponent,
-    MainpageComponent
+    MainpageComponent,
+    ProductDetailsComponent,
+    EditProductComponent,
+    AddNewComponent,
+    LoginComponent,
+    ModalDirective,
+    NewUserComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

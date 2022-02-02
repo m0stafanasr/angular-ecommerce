@@ -1,7 +1,7 @@
 import {DiscountOffers} from 'src/app/view_models/discount-offers'
 
 export interface IProduct {
-    ID: number,
+    id: number,
     Name: string,
     quantity: number,
     Price: number

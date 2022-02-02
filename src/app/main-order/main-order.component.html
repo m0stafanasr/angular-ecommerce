@@ -16,7 +16,7 @@
 
   <hr>
   <div>
-    <app-products [sendCatID]="selectedCat" (totalPrice)="getTotalPrice($event)" (addedProduct)="addToCart($event)"></app-products>
+    <app-products [sendCatID]="selectedCat" [returnQuant]="backQuant" (totalPrice)="getTotalPrice($event)" (addedProduct)="addToCart($event)"></app-products>
 </div> 
 <div class="row">
     <div class="row">
@@ -47,11 +47,13 @@
                 <button class="btn-success col-3" (click)="decval(prod)">-</button>
             </td>
             <td scope="col-2">{{prod.Price * prod.quantity}}</td>
-            <td scope="col-2" ><button class="btn btn-primary" (click)="deleteprod(prod, prod.Price, i)">Delete</button></td>
+            <td scope="col-2" ><button class="btn btn-primary" (click)="deleteprod(prod, prod.Price, i)" [(ngModel)]="backQuant" >Delete</button></td>
           </tr>
 
         </tbody>
-      </table>-->
-
+      </table>
+      <div class="alert alert-success " role="alert" id="alert" #Alert>
+        
+      </div>
 </div>
   </div> 
