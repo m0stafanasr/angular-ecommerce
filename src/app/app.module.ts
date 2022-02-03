@@ -7,7 +7,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProductsComponent } from './components/products/products.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShadowDirective } from './directives/shadow.directive';
 import { GetAgePipe } from './pipes/get-age.pipe';
 import { CreditcardPipe } from './pipes/creditcard.pipe';
@@ -47,7 +47,8 @@ import { NewUserComponent } from './components/new-user/new-user.component'
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

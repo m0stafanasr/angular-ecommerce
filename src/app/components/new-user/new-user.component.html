@@ -7,21 +7,24 @@
             <label for="usrname" class="form-label">
                 UserName:
             </label>
-            <input type="text" formControlName="userName" class="form-control" id="usrName" name="username" [class.is-valid]="userName?.valid" >
+            <input type="text" formControlName="userName" class="form-control" id="usrName" name="username"
+                [class.is-valid]="userName?.valid">
             <div class="alert alert-warning" [hidden]="userName?.valid || userName?.untouched">
-                <small >user name is required</small>
-                <small >user name must be 5 letters at least</small>
-                <small>user name <b>{{userName?.errors?.['pattern'].actualValue}}</b> is used before <a>Login?</a></small>
+                <small>user name is required</small>
+                <small>user name must be 5 letters at least</small>
+                <small>user name <b>{{userName?.errors?.['pattern'].actualValue}}</b> is used before
+                    <a>Login?</a></small>
             </div>
         </div>
         <div class="row mb-3">
             <label for="pass" class="form-label">
                 password:
             </label>
-            <input type="password" formControlName="pass" class="form-control" id="pass" name="password" [class.is-valid]="pass?.valid" >
+            <input type="password" formControlName="pass" class="form-control" id="pass" name="password"
+                [class.is-valid]="pass?.valid">
             <div class="alert alert-warning" [hidden]="pass?.valid || pass?.untouched">
-                <small >Password is required</small>
-                <small >password must be 6 letters at least</small>
+                <small>Password is required</small>
+                <small>password must be 6 letters at least</small>
                 <small>password can't be the same as user name</small>
             </div>
         </div>
@@ -29,30 +32,33 @@
             <label for="cnfrmPass" class="form-label">
                 Confirm Password:
             </label>
-            <input type="password" formControlName="cnfrmPass" class="form-control" id="cnfrmPass" name="cnfrmPass" [class.is-valid]="cnfrmPass?.valid" >
+            <input type="password" formControlName="cnfrmPass" class="form-control" id="cnfrmPass" name="cnfrmPass"
+                [class.is-valid]="cnfrmPass?.valid">
             <div class="alert alert-warning" [hidden]="cnfrmPass?.valid || cnfrmPass?.untouched">
-                <small >passwords doesn't match</small>
+                <small>passwords doesn't match</small>
             </div>
         </div>
         <div class="row mb-3">
             <label for="email" class="form-label">
                 E-mail:
             </label>
-            <input type="email" formControlName="email" class="form-control" id="email" name="email" [class.is-valid]="email?.valid" >
+            <input type="email" formControlName="email" class="form-control" id="email" name="email"
+                [class.is-valid]="email?.valid">
             <div class="alert alert-warning" [hidden]="email?.valid || email?.untouched">
-                <small >Email is required</small>
-                <small >Email <b>{{email?.errors?.['pattern'].actualValue}}</b> already in use <a>Login?</a> </small>
+                <small>Email is required</small>
+                <small>Email <b>{{email?.errors?.['pattern'].actualValue}}</b> already in use <a>Login?</a> </small>
             </div>
         </div>
 
         <div class="row mb-3">
-            
+
             <div formArrayName="phone">
                 <div class="mb-3 ms-3" *ngFor="let phoneNo of phones.controls; let i=index">
-                  <label for="{{'phone-'+i}}" class="form-label" >Phone No. {{i+1}}: </label>
-                    <input type="text" [formControlName]="i" class="form-control" id="{{'phoneNo-'+ i}}" name="{{'phoneNo-'+i}}" [class.is-valid]="email?.valid" >
-                    <div class="alert alert-warning" [hidden]="email?.valid || email?.untouched">
-                        <small >phone is required</small>
+                    <label for="{{'phone-'+i}}" class="form-label">Phone No. {{i+1}}: </label>
+                    <input type="text" [formControlName]="i" class="form-control" id="{{'phoneNo-'+ i}}"
+                        name="{{'phoneNo-'+i}}" [class.is-valid]="email?.valid">
+                    <div class="alert alert-warning" [hidden]="phones?.valid || phones?.untouched">
+                        <small>phone is required</small>
                         <small>phone no must contains 11 numbers</small>
                     </div>
                     <button class="btn btn-primary" (click)="addPhone($event)">add another</button>
@@ -60,48 +66,57 @@
                 </div>
             </div>
         </div>
-      <div formGroupName="address">
-          <div class="mb-3">
-  <label for="uname" class="form-label">
-            city:
-        </label>
-        <input type="text" formControlName="city" class="form-control" id="city" name="city" [class.is-valid]="city?.valid" >
-        <div class="alert alert-warning" [hidden]="city?.valid || city?.untouched">
-            <small >city is required</small>
-        </div>
-          </div>
-          <div class="mb-3">
+        <div formGroupName="address">
+            <div class="mb-3">
+                <label for="uname" class="form-label">
+                    city:
+                </label>
+                <input type="text" formControlName="city" class="form-control" id="city" name="city"
+                    [class.is-valid]="city?.valid">
+                <div class="alert alert-warning" [hidden]="city?.valid || city?.untouched">
+                    <small>city is required</small>
+                </div>
+            </div>
+            <div class="mb-3">
                 <label for="street" class="form-label">
-            Street:
-        </label>
-        <input type="text" formControlName="street" class="form-control" id="street" name="street" [class.is-valid]="street?.valid" >
-        <div class="alert alert-warning" [hidden]="street?.valid || street?.untouched">
-            <small >street is required</small>
-        </div> 
+                    Street:
+                </label>
+                <input type="text" formControlName="street" class="form-control" id="street" name="street"
+                    [class.is-valid]="street?.valid">
+                <div class="alert alert-warning" [hidden]="street?.valid || street?.untouched">
+                    <small>street is required</small>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="pstCode" class="form-label">
+                    postal Code:
+                </label>
+                <input type="pstCode" formControlName="pstCode" class="form-control" id="pstCode" name="pstCode">
+            </div>
         </div>
         <div class="mb-3">
-              <label for="pstCode" class="form-label">
-            postal Code:
-        </label>
-        <input type="pstCode" formControlName="pstCode" class="form-control" id="pstCode" name="pstCode">
-        </div>
-      </div>
-           <div class="mb-3">
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="toOffice" id="toOffice">
-        <label class="form-check-label" for="toOffice">
-          to Office
-        </label>
-      </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="delivery" name="delivery"
+                    id="specificDay" (change)="updateDelivery()">
+                <label class="form-check-label" for="specificDay">
+                    specific day
+                </label>
+            </div>
 
-        <div class="form-check">
-        <input class="form-check-input" type="radio" name="toHome" id="toHome" checked>
-        <label class="form-check-label" for="toHome">
-          to Home
-        </label>
-      </div>
-      </div>
-      <button [disabled]="registerform.invalid" type="submit" class="btn btn-success">Register New User</button>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="delivery" name="delivery" id="anyDay"
+                    checked (change)="updateDelivery()">
+                <label class="form-check-label" for="anyDay">
+                    any day
+                </label>
+            </div>
+        </div>
+        <div class="mb-3 ms-3" *ngIf="delivery?.value=='specific day'">
+            <label for="rOther" class="form-label">Specify</label>
+            <input type="text" formControlName="specificDelivery" class="form-control" id="option" name="delivery">
+      
+        </div>
+        <button [disabled]="registerform.invalid" type="submit" class="btn btn-success">Register New User</button>
     </form>
 
 </div>

@@ -79,7 +79,8 @@
         "street": "talaat harb",
         "postalcode": "17321"
       },
-      "deliveryoptions": "tooffice"
+      "deliveryoptions": "any Day",
+      "delivery Day": ""
     }
   ]
 }
