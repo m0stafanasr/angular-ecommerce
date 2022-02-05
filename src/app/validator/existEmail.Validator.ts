@@ -6,7 +6,7 @@ export function existEmail(existMails: string[]):ValidatorFn{
          if(email.length==0 && control.untouched)
             return null;
 
-        let validationErrors = {'this mail exists': {'value': email}}
+        let validationErrors = {existEmail: {message: "this mail exist"}}
         let found = existMails.includes(email)
         return found? validationErrors:null;
     }

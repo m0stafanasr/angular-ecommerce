@@ -4,34 +4,40 @@ import { existEmail } from 'src/app/validator/existEmail.Validator';
 import { existUser } from 'src/app/validator/existUser.validator';
 import { passwordvalidation } from 'src/app/validator/password.validator';
 import { passwordvalidationuser } from 'src/app/validator/usermatch.validator';
+import { Iuser } from 'src/app/view_models/Iuser';
+import {Router} from '@angular/router';
+import {RegisterService} from 
 @Component({
   selector: 'app-new-user',
   templateUrl: './new-user.component.html',
   styleUrls: ['./new-user.component.scss']
 })
 export class NewUserComponent implements OnInit {
-  registerform!: FormGroup;
-  ExistmailValidator:string[]=[]
+  registerform: FormGroup;
+  existMails:string[]=[]
   ExistUsers:string[]=[]
-  passwordMatch:string=''
 
-  constructor(private fg: FormBuilder) { 
-    this.ExistUsers=["mostafa", "salma", "dd@dd.com"];
-    this.registerform= fg.group({
+
+  constructor(private fB: FormBuilder) { 
+    this.ExistUsers=["mostafa", "salma", ];
+    this.existMails=["dd@dd.com", "mostafa@gmail.com"]
+    this.registerform= fB.group({
     userName:['', [Validators.required, Validators.pattern('[A-Za-z]{5,}'),existUser(this.ExistUsers) ]],
     pass:['', [Validators.required, Validators.pattern('[A-Za-z0-9]{6,}')]],
     cnfrmpass: ['',[Validators.required]],
-    email:['',[Validators.required, existEmail(this.ExistmailValidator)]],
-    phones:fg.array([this.fg.control('')]),
-    address:fg.group({
-      city:[''],
-      street:[''],
-      pstCode:[''],
+    email:['',[Validators.required, existEmail(this.existMails)]],
+    phones:fB.array([this.fB.control('')] ),
+    address:fB.group({
+      city:['',[Validators.required]],
+      street:['',[Validators.required]],
+      pstCode:['',[Validators.required]],
 
-    }),
-    delivery: [''],
-    specificDelivery:['']
-  },{validators: [passwordvalidation]})}
+      }),
+      delivery: [''],
+      deliverySpec:['']
+    },{validators: [passwordvalidation]})
+
+  }
 
 
  
@@ -54,6 +60,7 @@ export class NewUserComponent implements OnInit {
 
   get email(){
     return this.registerform.get('email')
+
   }
   get phones(){
     return this.registerform.get('phones') as FormArray
@@ -62,8 +69,8 @@ export class NewUserComponent implements OnInit {
     return this.registerform.get('delivery') 
   }
   addPhone(event:any){
-    this.phones.push(this.fg.control(''))
-    event.target?.classList.add('d-none')
+    this.phones.push(this.fB.control(''))
+    event.target?.classList.add('d-none');
   }
   get city(){
     return this.registerform.get('city')
@@ -75,17 +82,34 @@ get street(){
   return this.registerform.get('street')
 }
   updateDelivery(){
-
+    if (this.delivery?.value == "specificDay") {
+      this.registerform.get('specificDelivery')?.addValidators([Validators.required]);
+    }
+    else {
+      this.registerform.get('specificDelivery')?.clearValidators();
+    }
+    this.registerform.get('specificDelivery ')?.updateValueAndValidity();
   }
 
-removephone(){
   
+
+removephone(){
+  this.phones.removeAt(this.phones.length-1)
 }
 
 
  register(){
+  let userModel: Iuser  = this.registerform.value as Iuser;
+  console.log(userModel);
+
+  const observer={
+    next: (userModel:Iuser)=>{
+      this.router.navigateByUrl('/login')
+    }
+  }
+}
 
  }
 
  
-}
+

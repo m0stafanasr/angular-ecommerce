@@ -6,7 +6,7 @@ export function existUser(existUsers: string[]):ValidatorFn{
          if(userName.length==0 && control.untouched)
             return null;
 
-        let validationErrors = {'this user exists': {'value': userName}}
+        let validationErrors = {existUser: {message: "this user exist"}}
         let found = existUsers.includes(userName)
         return found? validationErrors:null;
     }
