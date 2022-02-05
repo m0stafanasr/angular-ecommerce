@@ -65,7 +65,7 @@
       "discount": "DiscountOffers.discount2"
     }
   ],
-  "profile": [
+  "users": [
     {
       "username": "nametest",
       "password": "pass123",

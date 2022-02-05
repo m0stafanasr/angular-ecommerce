@@ -6,7 +6,8 @@ import { passwordvalidation } from 'src/app/validator/password.validator';
 import { passwordvalidationuser } from 'src/app/validator/usermatch.validator';
 import { Iuser } from 'src/app/view_models/Iuser';
 import {Router} from '@angular/router';
-import {RegisterService} from 
+import { RegisterService } from 'src/app/services/register.service';
+import { LoginService } from 'src/app/services/login.service';
 @Component({
   selector: 'app-new-user',
   templateUrl: './new-user.component.html',
@@ -18,7 +19,7 @@ export class NewUserComponent implements OnInit {
   ExistUsers:string[]=[]
 
 
-  constructor(private fB: FormBuilder) { 
+  constructor(private fB: FormBuilder, private router: Router , private userserv: RegisterService, private authserv: LoginService) { 
     this.ExistUsers=["mostafa", "salma", ];
     this.existMails=["dd@dd.com", "mostafa@gmail.com"]
     this.registerform= fB.group({
@@ -105,8 +106,10 @@ removephone(){
   const observer={
     next: (userModel:Iuser)=>{
       this.router.navigateByUrl('/login')
-    }
+    }, error:  (err:Error)=>{alert(err.message)}
   }
+  this.userserv.addUser(userModel).subscribe(observer);
+  this.authserv.login(userModel.username,userModel.password)
 }
 
  }

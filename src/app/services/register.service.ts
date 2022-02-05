@@ -31,5 +31,13 @@ export class RegisterService {
     .pipe(retry(2), catchError(this.handleError))
   }
 
+  isuserexest(val:string) 
+  { 
+    let found=this.httpclient.get<Iuser[]>(`${environment.APIURL}/Users?email=${val}`);
+    if(found)
+    return true;
+    else 
+    return false;
+  }
 }
 
